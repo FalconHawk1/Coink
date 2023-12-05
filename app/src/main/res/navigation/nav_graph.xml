@@ -7,8 +7,17 @@
 
     <fragment
         android:id="@+id/fragment_register_number"
-        android:name="com.example.coink.ui.RegisterNumberFragment"
+        android:name="com.example.coink.ui.register.RegisterNumberFragment"
         tools:layout="@layout/fragment_register_number">
+        <action
+            android:id="@+id/action_fragment_register_number_to_fragment_account_data"
+            app:destination="@+id/fragment_account_data" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_account_data"
+        android:name="com.example.coink.ui.register.AccountDataFragment"
+        tools:layout="@layout/fragment_account_data">
     </fragment>
 
 </navigation>
