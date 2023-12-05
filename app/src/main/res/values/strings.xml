@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Coink</string>
+    <string name="register_number_caption">Para comenzar, por favor ingresa <b>tu número de celular.</b></string>
 </resources>
