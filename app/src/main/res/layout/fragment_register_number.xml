@@ -39,26 +39,31 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_margin="15dp"
         android:layout_marginTop="8dp"
         android:background="@color/greenCoink"
-        app:layout_constraintTop_toBottomOf="@+id/lnrLayout"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="15dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lnrLayout" />
 
     <TextView
         android:id="@+id/txtNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:hint="(XXX) - XXXXXXX"
+        android:textSize="30sp"
+        android:maxLength="11"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@id/gridLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
-    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <GridLayout
+        android:id="@+id/gridLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -66,12 +71,14 @@
         android:orientation="horizontal"
         android:padding="16dp"
         android:theme="@style/MyGridLayoutTheme"
-        app:layout_constraintTop_toBottomOf="@+id/txtNumber"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/txtNumber">
 
         <!-- Botones del 1 al 9 -->
         <Button
+            android:id="@+id/one"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
@@ -79,8 +86,10 @@
             android:padding="16dp"
             android:text="1"
             android:textColor="@color/darkGreen"
-            android:textSize="20sp"/>
+            android:textSize="30sp" />
+
         <Button
+            android:id="@+id/two"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
@@ -88,8 +97,10 @@
             android:padding="16dp"
             android:text="2"
             android:textColor="@color/darkGreen"
-            android:textSize="20sp"/>
+            android:textSize="30sp" />
+
         <Button
+            android:id="@+id/three"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
@@ -97,8 +108,10 @@
             android:padding="16dp"
             android:text="3"
             android:textColor="@color/darkGreen"
-            android:textSize="20sp"/>
+            android:textSize="30sp" />
+
         <Button
+            android:id="@+id/four"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
@@ -106,8 +119,10 @@
             android:padding="16dp"
             android:text="4"
             android:textColor="@color/darkGreen"
-            android:textSize="20sp"/>
+            android:textSize="30sp" />
+
         <Button
+            android:id="@+id/five"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
@@ -115,8 +130,10 @@
             android:padding="16dp"
             android:text="5"
             android:textColor="@color/darkGreen"
-            android:textSize="20sp"/>
+            android:textSize="30sp" />
+
         <Button
+            android:id="@+id/six"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
@@ -124,8 +141,10 @@
             android:padding="16dp"
             android:text="6"
             android:textColor="@color/darkGreen"
-            android:textSize="20sp"/>
+            android:textSize="30sp" />
+
         <Button
+            android:id="@+id/seven"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
@@ -133,8 +152,10 @@
             android:padding="16dp"
             android:text="7"
             android:textColor="@color/darkGreen"
-            android:textSize="20sp"/>
+            android:textSize="30sp" />
+
         <Button
+            android:id="@+id/eight"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
@@ -142,8 +163,10 @@
             android:padding="16dp"
             android:text="8"
             android:textColor="@color/darkGreen"
-            android:textSize="20sp"/>
+            android:textSize="30sp" />
+
         <Button
+            android:id="@+id/nine"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
@@ -151,20 +174,26 @@
             android:padding="16dp"
             android:text="9"
             android:textColor="@color/darkGreen"
-            android:textSize="20sp"/>
+            android:textSize="30sp" />
+
         <Button
+            android:id="@+id/erase"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="#00000000"
-            android:drawableTop="@drawable/baseline_clear_24"/>
+            android:drawableTop="@drawable/baseline_clear_24" />
+
         <Button
+            android:id="@+id/zero"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
             android:background="#00000000"
-            android:drawableTop="@drawable/baseline_exposure_zero_24"/>
+            android:drawableTop="@drawable/baseline_exposure_zero_24" />
+
         <Button
+            android:id="@+id/ok"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_columnWeight="1"
