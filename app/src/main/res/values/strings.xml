@@ -2,4 +2,6 @@
     <string name="app_name">Coink</string>
     <string name="register_number_caption">Para comenzar, por favor ingresa <b>tu número de celular.</b></string>
     <string name="account_data_caption">Ahora necesitamos saber algunos datos tuyos</string>
+    <string name="select_document_type_hint">Tipo de documento</string>
+    <string name="select_gender_hint">Genero</string>
 </resources>
