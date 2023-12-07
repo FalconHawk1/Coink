@@ -29,9 +29,11 @@ class RegisterViewModel: ViewModel() {
 
     fun getDocumentType() {
         viewModelScope.launch {
-                val response = registerRepository.consultDocumentType()
-                _documentTypes.value = response
-                Log.d("TAGI", "getDocumentType: ${documentTypes.value}")
+                registerRepository.consultDocumentType({
+                    _documentTypes.value = it
+                },{
+                    _error.postValue(it)
+                })
         }
     }
 }

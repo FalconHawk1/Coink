@@ -2,7 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#918E8E</color>
     <color name="greenCoink">#1EEA00</color>
     <color name="darkGreen">#004B40</color>
     <color name="buttonColor">#FF5733</color>
+    <color name="transparent">#00000000</color>
 </resources>

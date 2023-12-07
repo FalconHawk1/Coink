@@ -88,13 +88,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="16dp"
-                    android:paddingLeft="16dp"
+                    android:paddingStart="16dp"
                     android:text="Tipo de documento"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="#8C8989"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"/>
+                    android:background="?android:attr/selectableItemBackground"/>
 
                 <Spinner
                     android:id="@+id/spinnerDocumentType"
@@ -102,33 +100,67 @@
                     android:layout_height="50dp"
                     android:padding="16dp"
                     android:layout_marginTop="-1dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_document_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:boxBackgroundMode="none"
+                    android:background="@drawable/edit_text_bottom_border">
+
                 <EditText
-                    android:id="@+id/txtDocumentNumber"
+                    android:id="@+id/edtDocumentNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Número de documento"
                     android:maxLength="10"
                     android:inputType="number"
-                    android:padding="20dp"/>
+                    android:textSize="16sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_DocumentDateExpedition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:boxBackgroundMode="none"
+                    android:background="@drawable/edit_text_bottom_border">
+
                 <EditText
                     android:id="@+id/txtDocumentDateExpedition"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Fecha de expedición del documento"
+                    android:maxLength="10"
                     android:inputType="date"
-                    android:padding="20dp"/>
+                    android:textSize="16sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_DocumentDateBirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:boxBackgroundMode="none"
+                    android:background="@drawable/edit_text_bottom_border">
+
                 <EditText
                     android:id="@+id/txtDocumentDateBirth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Fecha de nacimiento"
+                    android:maxLength="10"
                     android:inputType="date"
-                    android:padding="20dp"/>
+                    android:textSize="16sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="16dp"
-                    android:paddingLeft="16dp"
+                    android:paddingStart="16dp"
                     android:text="Genero"
                     android:textSize="18sp"
                     android:textColor="#8C8989"
@@ -138,9 +170,14 @@
                 <Spinner
                     android:id="@+id/spinnerGender"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:padding="16dp"
+                    android:layout_marginTop="-1dp"
                     android:prompt="@string/select_gender_hint"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -155,54 +192,76 @@
                     android:textSize="25sp"
                     android:textStyle="bold"
                     android:textColor="@color/darkGreen"/>
-                <EditText
-                    android:id="@+id/txtEmail"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_txtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Correo electrónico"
-                    android:maxLength="10"
-                    android:inputType="textEmailAddress"
-                    android:padding="20dp"/>
+                    android:layout_marginTop="10dp"
+                    app:boxBackgroundMode="none"
+                    android:background="@drawable/edit_text_bottom_border">
+
+                    <EditText
+                        android:id="@+id/txtEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Correo electrónico"
+                        android:inputType="textEmailAddress"
+                        android:textSize="16sp"/>
+                </com.google.android.material.textfield.TextInputLayout>
                 <RelativeLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/txtEmailConfirm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirmar correo electronico"
-                    android:inputType="textEmailAddress"
-                    android:padding="20dp"/>
+                    android:layout_marginTop="10dp">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_txtEmailConfirm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxBackgroundMode="none"
+                        android:background="@drawable/edit_text_bottom_border">
+
+                        <EditText
+                            android:id="@+id/txtEmailConfirm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Confirmar correo electronico"
+                            android:inputType="textEmailAddress"
+                            android:textSize="16sp"/>
+                    </com.google.android.material.textfield.TextInputLayout>
                     <ImageView
                         android:id="@+id/imgConfirmEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignEnd="@id/txtEmailConfirm"
+                        android:layout_alignEnd="@id/til_txtEmailConfirm"
                         android:layout_centerVertical="true"
                         android:src="@drawable/baseline_check_24"
                         android:background="?android:attr/selectableItemBackground"
                         android:visibility="gone"/>
                 </RelativeLayout>
                 <RelativeLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/txtPin"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_txtPin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Pin de seguridad"
-                        android:maxLength="4"
-                        android:inputType="numberPassword"
-                        android:padding="20dp"/>
+                        app:boxBackgroundMode="none"
+                        android:background="@drawable/edit_text_bottom_border">
 
+                        <EditText
+                            android:id="@+id/txtPin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Pin de seguridad"
+                            android:maxLength="4"
+                            android:inputType="numberPassword"
+                            android:textSize="16sp"/>
+                    </com.google.android.material.textfield.TextInputLayout>
                     <ImageButton
                         android:id="@+id/btnShowPassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignEnd="@id/txtPin"
+                        android:layout_alignEnd="@id/til_txtPin"
                         android:layout_centerVertical="true"
                         android:src="@drawable/baseline_remove_red_eye_24"
                         android:background="?android:attr/selectableItemBackground"/>
@@ -211,31 +270,37 @@
                         android:id="@+id/btnHidePassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignEnd="@id/txtPin"
+                        android:layout_alignEnd="@id/til_txtPin"
                         android:layout_centerVertical="true"
                         android:src="@drawable/baseline_visibility_off_24"
                         android:background="?android:attr/selectableItemBackground"
                         android:visibility="gone"/>
                 </RelativeLayout>
                 <RelativeLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/txtPinConfirm"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_txtPinConfirm"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Confirmar PIN de seguridad"
-                        android:maxLength="4"
-                        android:inputType="numberPassword"
-                        android:padding="20dp"/>
+                        app:boxBackgroundMode="none"
+                        android:background="@drawable/edit_text_bottom_border">
 
+                        <EditText
+                            android:id="@+id/txtPinConfirm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Confirmar Pin de seguridad"
+                            android:maxLength="4"
+                            android:inputType="numberPassword"
+                            android:textSize="16sp"/>
+                    </com.google.android.material.textfield.TextInputLayout>
                     <ImageButton
                         android:id="@+id/btnShowConfirmPassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignEnd="@id/txtPinConfirm"
+                        android:layout_alignEnd="@id/til_txtPinConfirm"
                         android:layout_centerVertical="true"
                         android:src="@drawable/baseline_remove_red_eye_24"
                         android:background="?android:attr/selectableItemBackground"/>
@@ -244,13 +309,23 @@
                         android:id="@+id/btnHideConfirmPassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignEnd="@id/txtPinConfirm"
+                        android:layout_alignEnd="@id/til_txtPinConfirm"
                         android:layout_centerVertical="true"
                         android:src="@drawable/baseline_visibility_off_24"
                         android:background="?android:attr/selectableItemBackground"
                         android:visibility="gone"/>
                 </RelativeLayout>
             </LinearLayout>
+            <Button
+                android:id="@+id/registerButtonUnable"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/transparent"
+                android:text="SIGUIENTE"
+                android:textSize="20sp"
+                android:textColor="@color/gray"
+                android:textStyle="bold"
+                android:layout_margin="15dp"/>
             <Button
                 android:id="@+id/registerButton"
                 android:layout_width="match_parent"
@@ -260,7 +335,8 @@
                 android:textSize="20sp"
                 android:textColor="@color/darkGreen"
                 android:textStyle="bold"
-                android:layout_margin="15dp"/>
+                android:layout_margin="15dp"
+                android:visibility="gone"/>
         </LinearLayout>
 
     </ScrollView>

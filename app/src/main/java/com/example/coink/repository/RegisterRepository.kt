@@ -11,10 +11,13 @@ class RegisterRepository {
 
     private val apiService = RetrofitClient.instance.create(APIService::class.java)
 
-    suspend fun consultDocumentType(): List<DocumentTypeResponse> {
+    suspend fun consultDocumentType(success:((List<DocumentTypeResponse>)->Unit),error: ((Boolean)->Unit)) {
         return withContext(Dispatchers.IO){
             val response = apiService.consultDocumentType()
-                response?.body()!!
+            if(response?.isSuccessful == true && response.body() != null)
+                success(response.body()!!)
+            else
+                error(true)
         }
     }
 }
