@@ -1,6 +1,6 @@
 package com.example.coink.ui.register
 
-import android.R
+import com.example.coink.R
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,8 +12,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Spinner
 import androidx.appcompat.app.AlertDialog
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -21,6 +23,11 @@ import com.example.coink.RegisterActivity
 import com.example.coink.adapter.DocumentTypeAdapter
 import com.example.coink.databinding.FragmentAccountDataBinding
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -32,6 +39,7 @@ class AccountDataFragment: Fragment() {
     private lateinit var viewModel: RegisterViewModel
     private lateinit var adapter: DocumentTypeAdapter
     private lateinit var spinnerDocumentType: Spinner
+    private lateinit var txtDocumentNumber: EditText
     private lateinit var spinnerGender: Spinner
     private lateinit var tilTxtDocumentDateBirth: TextInputLayout
     private lateinit var txtDocumentDateExpedition: EditText
@@ -52,6 +60,8 @@ class AccountDataFragment: Fragment() {
     private lateinit var btnHideConfirmPassword: ImageButton
     private lateinit var registerButtonUnable: Button
     private lateinit var registerButton: Button
+
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,11 +86,13 @@ class AccountDataFragment: Fragment() {
             val toolbarTitle = registerActivity.binding.toolbarTitle
             toolbarTitle.text = "DATOS DE CUENTA"
             registerActivity.binding.toolbar.setNavigationOnClickListener {
-                findNavController().navigateUp()
+                findNavController().navigate(R.id.action_fragment_account_data_to_fragment_register_number)
             }
         }
 
         spinnerDocumentType = binding.spinnerDocumentType
+
+        txtDocumentNumber = binding.txtDocumentNumber
 
         spinnerGender = binding.spinnerGender
 
@@ -109,6 +121,13 @@ class AccountDataFragment: Fragment() {
         registerButtonUnable = binding.registerButtonUnable
         registerButton = binding.registerButton
 
+        progressBar = binding.progressBar
+
+        performTimeConsumingOperation()
+
+        txtDocumentNumber.addTextChangedListener {
+            updateRegisterButtonVisibility(null)
+        }
 
         txtEmail.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -179,6 +198,7 @@ class AccountDataFragment: Fragment() {
                 } else {
                     tilTxtDocumentDateExpedition.error = null
                 }
+                updateRegisterButtonVisibility(tilTxtDocumentDateExpedition.error)
             }
         })
 
@@ -216,6 +236,7 @@ class AccountDataFragment: Fragment() {
                 } else {
                     tilTxtDocumentDateBirth.error = null
                 }
+                updateRegisterButtonVisibility(tilTxtDocumentDateBirth.error)
             }
         })
 
@@ -228,6 +249,11 @@ class AccountDataFragment: Fragment() {
                 dialog.dismiss()
             }
             alert.show()
+        }
+
+        registerButton.setOnClickListener {
+            saveRegisterData()
+            findNavController().navigate(R.id.action_fragment_account_data_to_fragment_accept_contract)
         }
 
 
@@ -255,7 +281,7 @@ class AccountDataFragment: Fragment() {
 
 
         val gender = arrayOf("Hombre", "Mujer", "Otro")
-        val adapter = context?.let { ArrayAdapter(it, R.layout.simple_spinner_item, gender) }
+        val adapter = context?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, gender) }
         adapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerGender.adapter = adapter
 
@@ -285,6 +311,48 @@ class AccountDataFragment: Fragment() {
         return true
     }
 
+    private fun saveRegisterData() {
+        val documentType = spinnerDocumentType.selectedItem.toString()
+        val documentNumber = txtDocumentNumber.text.toString()
+        val documentDateExpedition = txtDocumentDateExpedition.text.toString()
+        val documentDateBirth = txtDocumentDateBirth.text.toString()
+        val gender = spinnerGender.selectedItem.toString()
+        val email = txtEmail.text.toString()
+        val password = txtPassword.text.toString()
+
+        viewModel.documentTypeTextValue = documentType
+        viewModel.documentNumberTextValue = documentNumber
+        viewModel.documentDateExpeditionTextValue = documentDateExpedition
+        viewModel.documentDateBirthTextValue = documentDateBirth
+        viewModel.genderTextValue = gender
+        viewModel.emailTextValue = email
+        viewModel.passwordTextValue = password
+    }
+
+    private fun updateRegisterButtonVisibility(error: CharSequence?) {
+        if (error == null) {
+            val documentType = spinnerDocumentType.selectedItem.toString()
+            val documentNumber = txtDocumentNumber.text.toString()
+            val documentDateExpedition = txtDocumentDateExpedition.text.toString()
+            val documentDateBirth = txtDocumentDateBirth.text.toString()
+            val email = txtEmail.text.toString()
+            val emailConfirm = txtEmailConfirm.text.toString()
+            val password = txtPassword.text.toString()
+            val passwordConfirm = txtPasswordConfirm.text.toString()
+
+            if (documentType.isNotEmpty() && documentNumber.isNotEmpty() && documentDateExpedition.isNotEmpty() && documentDateBirth.isNotEmpty() && email.isNotEmpty() && emailConfirm.isNotEmpty() && password.isNotEmpty() && passwordConfirm.isNotEmpty()) {
+                registerButtonUnable.visibility = View.GONE
+                registerButton.visibility = View.VISIBLE
+            } else {
+                registerButtonUnable.visibility = View.VISIBLE
+                registerButton.visibility = View.GONE
+            }
+        } else {
+            registerButtonUnable.visibility = View.VISIBLE
+            registerButton.visibility = View.GONE
+        }
+    }
+
 
     private fun updateCheckImageVisibility() {
         val email = txtEmail.text.toString()
@@ -295,6 +363,7 @@ class AccountDataFragment: Fragment() {
         } else {
             tilEmail.error = "Correo electrónico no válido"
         }
+        updateRegisterButtonVisibility(tilEmail.error)
         if (isValidEmail(emailConfirm)) {
             if (email == emailConfirm) {
                 imgConfirmEmail.visibility = View.VISIBLE
@@ -306,6 +375,7 @@ class AccountDataFragment: Fragment() {
         } else {
             tilEmailConfirm.error = "Correo electrónico no válido"
         }
+        updateRegisterButtonVisibility(tilEmailConfirm.error)
     }
 
     private fun checkPinConfimation(){
@@ -317,19 +387,40 @@ class AccountDataFragment: Fragment() {
         }else{
             tilPasswordConfirm.error = "Este campo no coincide con el PIN"
         }
+        updateRegisterButtonVisibility(tilPasswordConfirm.error)
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
+    private fun performTimeConsumingOperation() {
+        // Show the loader
+        showLoader()
 
+        GlobalScope.launch {
+            withContext(Dispatchers.Main) {
+                kotlinx.coroutines.delay(3000)
 
+                // Hide the loader when the operation is complete
+                hideLoader()
+            }
+        }
+    }
+
+    private fun showLoader() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideLoader() {
+        progressBar.visibility = View.GONE
+    }
     private fun observerViewModel() {
-        /*viewModel.getDocumentType()
+        viewModel.getDocumentType()
 
-        viewModel.documentTypes.observe(viewLifecycleOwner) {
-            it.let {
+        viewModel.documentTypes.observe(viewLifecycleOwner) { documentTypes ->
+            documentTypes?.let {
                 adapter = DocumentTypeAdapter(requireContext(), it)
                 spinnerDocumentType.adapter = adapter
             }
-        }*/
+        }
         viewModel.error.observe(viewLifecycleOwner) {
             it?.let {
                 if(it) {

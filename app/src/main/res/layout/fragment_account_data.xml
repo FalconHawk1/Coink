@@ -15,6 +15,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolImg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -114,7 +125,7 @@
                     android:background="@drawable/edit_text_bottom_border">
 
                 <EditText
-                    android:id="@+id/edtDocumentNumber"
+                    android:id="@+id/txtDocumentNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Número de documento"
@@ -321,7 +332,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:backgroundTint="@color/transparent"
-                android:text="SIGUIENTE"
+                android:text="@string/siguiente"
                 android:textSize="20sp"
                 android:textColor="@color/gray"
                 android:textStyle="bold"
@@ -331,7 +342,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:backgroundTint="@color/greenCoink"
-                android:text="SIGUIENTE"
+                android:text="@string/siguiente"
                 android:textSize="20sp"
                 android:textColor="@color/darkGreen"
                 android:textStyle="bold"

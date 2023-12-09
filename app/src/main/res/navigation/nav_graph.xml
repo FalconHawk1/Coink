@@ -18,6 +18,21 @@
         android:id="@+id/fragment_account_data"
         android:name="com.example.coink.ui.register.AccountDataFragment"
         tools:layout="@layout/fragment_account_data">
+        <action
+            android:id="@+id/action_fragment_account_data_to_fragment_accept_contract"
+            app:destination="@+id/fragment_accept_contract" />
+        <action
+            android:id="@+id/action_fragment_account_data_to_fragment_register_number"
+            app:destination="@+id/fragment_register_number" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_accept_contract"
+        android:name="com.example.coink.ui.register.AcceptContractFragment"
+        tools:layout="@layout/fragment_accept_contract">
+        <action
+            android:id="@+id/action_fragment_accept_contract_to_fragment_account_data"
+            app:destination="@+id/fragment_account_data" />
     </fragment>
 
 </navigation>
