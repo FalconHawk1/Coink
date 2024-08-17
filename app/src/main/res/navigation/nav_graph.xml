@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/fragment_register_number">
+
+    <fragment
+        android:id="@+id/fragment_register_number"
+        android:name="com.example.coink.ui.register.RegisterNumberFragment"
+        tools:layout="@layout/fragment_register_number">
+        <action
+            android:id="@+id/action_fragment_register_number_to_fragment_account_data"
+            app:destination="@+id/fragment_account_data" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_account_data"
+        android:name="com.example.coink.ui.register.AccountDataFragment"
+        tools:layout="@layout/fragment_account_data">
+        <action
+            android:id="@+id/action_fragment_account_data_to_fragment_accept_contract"
+            app:destination="@+id/fragment_accept_contract" />
+        <action
+            android:id="@+id/action_fragment_account_data_to_fragment_register_number"
+            app:destination="@+id/fragment_register_number" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_accept_contract"
+        android:name="com.example.coink.ui.register.AcceptContractFragment"
+        tools:layout="@layout/fragment_accept_contract">
+        <action
+            android:id="@+id/action_fragment_accept_contract_to_fragment_account_data"
+            app:destination="@+id/fragment_account_data" />
+    </fragment>
+
+</navigation>

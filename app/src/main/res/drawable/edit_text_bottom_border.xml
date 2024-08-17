@@ -1,0 +1,16 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Borde inferior negro -->
+    <item android:top="50dp">
+        <shape android:shape="line">
+            <solid android:color="@android:color/transparent" /> <!-- Color transparente -->
+            <stroke
+                android:width="1dp"
+                android:color="#8E8A8A" /> <!-- Borde negro con ancho de 2dp -->
+        </shape>
+    </item>
+
+</layer-list>
+
+
+
